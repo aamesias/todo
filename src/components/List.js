@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+// Displays a list of the todos the usesr has added.
 export default function List ({todos}) {
     return (
         <ul>
