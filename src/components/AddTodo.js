@@ -24,7 +24,7 @@ AddTodo.defaultProps = {
 
 AddTodo.propTypes = {
     placeholder: PropTypes.string,
-    value: PropTypes.string,
-    onChange: PropTypes.func,
-    onKeyDown: PropTypes.func,
+    value: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
+    onKeyDown: PropTypes.func.isRequired,
 }

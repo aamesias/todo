@@ -1,16 +1,17 @@
 import React from 'react'
 import List from './List'
 import AddTodo from './AddTodo'
+import Footer from './Footer'
 
 export default class Todos extends React.Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            todos: [], 
+            todos: [],
             input: '',
             isAllComplete: false,
-            view: 'all',
+            filter: 'all',
             nextKey: 0,
             editText: '',
             editKey: -1,
@@ -23,6 +24,10 @@ export default class Todos extends React.Component {
         this.handleToggleTodo = this.handleToggleTodo.bind(this)
         this.handleEditItem = this.handleEditItem.bind(this)
         this.updateEditText = this.updateEditText.bind(this)
+        this.updateFilter = this.updateFilter.bind(this)
+        this.handleClearCompleted = this.handleClearCompleted.bind(this)
+        this.handleToggleCompleteAll = this.handleToggleCompleteAll.bind(this)
+        //this.filterTodos = this.filterTodos.bind(this)
     }
 
     updateInput(e) {
@@ -34,19 +39,19 @@ export default class Todos extends React.Component {
     }
 
     handleAddTodo(e) {
-        if(e.keyCode === 13){
+        if (e.keyCode === 13) {
             this.setState((currentState) => {
                 return {
                     todos: currentState.todos.concat([{
                         item: this.state.input,
-                        isActive: true, 
+                        isActive: true,
                         key: this.state.nextKey,
-                    }]), 
+                    }]),
                     input: '',
                     isAllComplete: false,
                     nextKey: this.state.nextKey + 1,
                 }
-            
+
             })
         }
     }
@@ -66,28 +71,29 @@ export default class Todos extends React.Component {
                     todos: newStateOfTodos
                 }
             }
-        }) 
+        })
     }
 
     handleChangeTodoText(key, e) {
         const editText = this.state.editText
-        if(editText === '') {
+        if (editText === '') {
             return this.handleDeleteTodo(key)
         }
         this.setState((currentState) => {
 
             const newStateOfTodos = currentState.todos.map((todo) => {
-                if(todo.key === key) {
-                    return {...todo, item: editText,
-                }
+                if (todo.key === key) {
+                    return {
+                        ...todo, item: editText,
+                    }
                 } else {
                     return todo
                 }
             })
-            
+
             return {
-                todos: newStateOfTodos, 
-                editKey: -1, 
+                todos: newStateOfTodos,
+                editKey: -1,
                 editText: '',
             }
         })
@@ -96,25 +102,25 @@ export default class Todos extends React.Component {
     handleToggleTodo(key) {
         this.setState((currentState) => {
             const newStateOfTodos = currentState.todos.map((todo) => {
-                if(todo.key === key) {
-                    return {...todo, isActive: !todo.isActive }
+                if (todo.key === key) {
+                    return { ...todo, isActive: !todo.isActive }
                 } else {
                     return todo;
                 }
             })
             const numOfActiveItems = newStateOfTodos.filter((todo) => todo.isActive === true).length
-            if(numOfActiveItems === 0) {
+            if (numOfActiveItems === 0) {
                 return {
-                    todos: newStateOfTodos, 
+                    todos: newStateOfTodos,
                     isAllComplete: true
                 }
             } else {
                 return {
-                    todos: newStateOfTodos, 
+                    todos: newStateOfTodos,
                     isAllComplete: false
                 }
             }
-            
+
         })
     }
 
@@ -133,26 +139,74 @@ export default class Todos extends React.Component {
         })
     }
 
+    updateFilter(newFilter) {
+        this.setState({
+            filter: newFilter
+        })
+    }
+
+    handleClearCompleted() {
+        this.setState((currentState) => {
+            const newStateOfTodos = currentState.todos.filter((todo) => todo.isActive === true)
+            const numOfActiveItems = newStateOfTodos.length
+            if (numOfActiveItems === 0) {
+                return {
+                    isAllComplete: true,
+                    todos: newStateOfTodos
+                }
+            } else {
+                return {
+                    isAllComplete: false,
+                    todos: newStateOfTodos
+                }
+            }
+        })
+    }
+
+
+    // updates all todos to toggle active or not active
+    handleToggleCompleteAll() {
+        this.setState((currentState) => {
+            return {
+                ...currentState,
+                isAllComplete: !currentState.isAllComplete,
+                todos: currentState.todos.map((todo) => ({
+                    ...todo,
+                    isActive: currentState.isAllComplete
+                }))
+            }
+        })
+    }
+
+
     render() {
         return (
             <React.Fragment>
-                <h1 className='title center-text'>Todo</h1>
+                {console.log(this.state)}
+                <h1>Todo</h1>
                 <AddTodo
                     placeholder='What needs to be done?'
                     value={this.state.input}
                     onChange={this.updateInput}
                     onKeyDown={this.handleAddTodo}
                 />
-                <List 
+                <List
                     todos={this.state.todos}
+                    filter={this.state.filter}
                     editKey={this.state.editKey}
                     onDeleteTodo={this.handleDeleteTodo}
                     onToggleTodo={this.handleToggleTodo}
+                    onToggleCompleteAll={this.handleToggleCompleteAll}
                     onChangeTodoText={this.handleChangeTodoText}
 
                     onEditItem={this.handleEditItem}
                     onUpdateEditText={this.updateEditText}
                     value={this.state.editText}
+                />
+                <Footer
+                    todos={this.state.todos}
+                    onFilterChange={this.updateFilter}
+                    onClearCompleted={this.handleClearCompleted}
                 />
             </React.Fragment>
         )
