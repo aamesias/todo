@@ -1,7 +1,9 @@
 import React from 'react'
-import List from './List'
 import AddTodo from './AddTodo'
-import Footer from './Footer'
+import TodoList from './TodoList'
+import ListMenu from './ListMenu'
+import { Row } from 'antd'
+
 
 export default class Todos extends React.Component {
     constructor(props) {
@@ -182,28 +184,28 @@ export default class Todos extends React.Component {
     render() {
         return (
             <React.Fragment>
-                {console.log(this.state)}
                 <h1>Todo</h1>
                 <AddTodo
+                    todos={this.state.todos}
+                    onToggleCompleteAll={this.handleToggleCompleteAll}
                     placeholder='What needs to be done?'
                     value={this.state.input}
                     onChange={this.updateInput}
                     onKeyDown={this.handleAddTodo}
                 />
-                <List
+                <TodoList
                     todos={this.state.todos}
                     filter={this.state.filter}
                     editKey={this.state.editKey}
                     onDeleteTodo={this.handleDeleteTodo}
                     onToggleTodo={this.handleToggleTodo}
-                    onToggleCompleteAll={this.handleToggleCompleteAll}
                     onChangeTodoText={this.handleChangeTodoText}
 
                     onEditItem={this.handleEditItem}
                     onUpdateEditText={this.updateEditText}
                     value={this.state.editText}
                 />
-                <Footer
+                <ListMenu
                     todos={this.state.todos}
                     onFilterChange={this.updateFilter}
                     onClearCompleted={this.handleClearCompleted}

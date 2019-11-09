@@ -1,12 +1,23 @@
+@import '~antd/dist/antd.css';
+
 html, body, #app {
   margin: 0;
   height: 100%;
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 25px;
+  padding: 25px 100px;
+  text-align: center;
 }
 
 li {
   list-style: none;
 }
+
+.ant-checkbox {
+  margin-right: 20px;
+}
+
+
+
+
