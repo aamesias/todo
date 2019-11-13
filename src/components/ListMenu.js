@@ -63,24 +63,27 @@ export default function ListMenu({ todos, onFilterChange, onClearCompleted }) {
     }
 
     return (
-        <Row align='middle' justify='center'>
-            <Col span={6}>
-                <NumOfItemsLeft
-                    todos={todos}
-                />
-            </Col>
-            <Col span={12}>
-                <Filters
-                    onFilterChange={onFilterChange}
-                />
-            </Col>
-            <Col span={6}>
-                <ClearCompleted
-                    todos={todos}
-                    onClearCompleted={onClearCompleted}
-                />
-            </Col>
-        </Row>
+        <div className='container todo-border todo-row margin'>
+
+            <Row type='flex' align='middle'>
+                <Col span={6}>
+                    <NumOfItemsLeft
+                        todos={todos}
+                    />
+                </Col>
+                <Col span={12}>
+                    <Filters
+                        onFilterChange={onFilterChange}
+                    />
+                </Col>
+                <Col span={6}>
+                    <ClearCompleted
+                        todos={todos}
+                        onClearCompleted={onClearCompleted}
+                    />
+                </Col>
+            </Row>
+        </div>
     )
 }
 

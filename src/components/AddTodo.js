@@ -1,14 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Input, Button, Row, Col } from 'antd'
+import { Input, Button, Row, Col, Icon } from 'antd'
 
 function CompleteAll({ todos, onToggleCompleteAll }) {
     if (todos.length !== 0) {
         return (
-            <Button
+            <Button className='check-all-button'
                 onClick={() => onToggleCompleteAll()}
             >
-                ❯
+                <Icon type="down" />
             </Button>
         )
     }
@@ -26,15 +26,15 @@ CompleteAll.propTypes = {
 // and adds it to the list after the user presses 'enter'
 export default function AddTodo({ todos, onToggleCompleteAll, placeholder, value, onChange, onKeyDown }) {
     return (
-        <React.Fragment>
-            <Row align='middle' justify='center'>
-                <Col span={2}>
+        <div className='container'>
+            <Row type='flex' justify='space-between'>
+                <Col span={3}>
                     <CompleteAll
                         todos={todos}
                         onToggleCompleteAll={onToggleCompleteAll}
                     />
                 </Col>
-                <Col span={22}>
+                <Col span={21}>
                     <Input
                         type='text'
                         placeholder={placeholder}
@@ -45,7 +45,7 @@ export default function AddTodo({ todos, onToggleCompleteAll, placeholder, value
                 </Col>
             </Row>
 
-        </React.Fragment>
+        </div>
     )
 }
 

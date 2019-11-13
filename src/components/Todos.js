@@ -2,7 +2,7 @@ import React from 'react'
 import AddTodo from './AddTodo'
 import TodoList from './TodoList'
 import ListMenu from './ListMenu'
-import { Row } from 'antd'
+import { List } from 'antd'
 
 
 export default class Todos extends React.Component {
@@ -184,7 +184,7 @@ export default class Todos extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <h1>Todo</h1>
+                <h1 className='center'>Todo</h1>
                 <AddTodo
                     todos={this.state.todos}
                     onToggleCompleteAll={this.handleToggleCompleteAll}

@@ -1,39 +1,53 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Button, Checkbox, Input, List, Typography, Row, Col } from 'antd'
+import { Icon, Checkbox, List, Input, Typography, Row, Col } from 'antd'
+import { Paragraph } from 'antd'
 
 function Item(props) {
     const todo = props.todo
     if (props.editKey === todo.key) {
         return (
-            <Input
-                onBlur={() => props.onChangeTodoText(todo.key)}
-                onKeyDown={(e) => e.keyCode === 13 ? props.onChangeTodoText(todo.key) : null}
-                type='text'
-                autoFocus='autofocus'
-                value={props.value}
-                onChange={props.onUpdateEditText}
-            />
+            /*<Paragraph editable={{onChange: props.onUpdateEditText}}>{props.value}</Paragraph>*/
+
+
+            <Row className='todo-row' type='flex' justify='space-between' align='middle'>
+                <Col span={2}> </Col>
+                <Col span={20}>
+                    <Input size='small'
+                        onBlur={() => props.onChangeTodoText(todo.key)}
+                        onKeyDown={(e) => e.keyCode === 13 ? props.onChangeTodoText(todo.key) : null}
+                        type='text'
+                        autoFocus='autofocus'
+                        value={props.value}
+                        onChange={props.onUpdateEditText}
+                    />
+                </Col>
+                <Col span={2}> </Col >
+            </Row >
         )
     } else {
         return (
-            <Row align='middle' justify='center'>
+            <Row className='todo-row' type='flex' justify='center' align='bottom'>
+                <Col span={2}>
                     <Checkbox
                         checked={!todo.isActive}
                         onChange={() => { props.onToggleTodo(todo.key) }}
                     />
-
+                </Col>
+                <Col span={21}>
                     <Typography.Text
                         onDoubleClick={() => props.onEditItem(todo.key, todo.item)}
                         style={{ textDecoration: todo.isActive ? 'none' : 'line-through' }}
                     >
                         {todo.item}
                     </Typography.Text>
+                </Col>
+                <Col span={1}>
 
-                    <Button className='delete-button'
-                        onClick={() => { props.onDeleteTodo(todo.key) }}>
-                        X
-                    </Button>
+                    <Icon className='delete-btn' type="delete" theme="twoTone" twoToneColor="#ff2f96"
+                        onClick={() => { props.onDeleteTodo(todo.key) }}
+                    />
+                </Col>
             </Row>
         )
     }
@@ -63,24 +77,30 @@ export default function TodoList(props) {
         filteredTodos = props.todos.filter((todo) => todo.isActive === true)
     }
 
-    return (
-        <List bordered='true'>
-            {filteredTodos.map((todo) => (
-                <List.Item key={todo.key}>
-                    <Item
-                        editKey={props.editKey}
-                        todo={todo}
-                        onToggleTodo={props.onToggleTodo}
-                        onDeleteTodo={props.onDeleteTodo}
-                        onUpdateEditText={props.onUpdateEditText}
-                        value={props.value}
-                        onChangeTodoText={props.onChangeTodoText}
-                        onEditItem={props.onEditItem}
-                    />
-                </List.Item>
-            ))}
-        </List>
-    )
+    if (props.todos.length === 0) {
+        return null
+    } else {
+        return (
+            <div className='container todo-row'>
+                <List bordered>
+                    {filteredTodos.map((todo) => (
+                        <List.Item key={todo.key}>
+                            <Item
+                                editKey={props.editKey}
+                                todo={todo}
+                                onToggleTodo={props.onToggleTodo}
+                                onDeleteTodo={props.onDeleteTodo}
+                                onUpdateEditText={props.onUpdateEditText}
+                                value={props.value}
+                                onChangeTodoText={props.onChangeTodoText}
+                                onEditItem={props.onEditItem}
+                            />
+                        </List.Item>
+                    ))}
+                </List>
+            </div>
+        )
+    }
 }
 
 TodoList.propTypes = {
