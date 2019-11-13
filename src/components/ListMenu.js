@@ -66,12 +66,12 @@ export default function ListMenu({ todos, onFilterChange, onClearCompleted }) {
         <div className='container todo-border todo-row margin white-background'>
 
             <Row type='flex' align='middle'>
-                <Col span={6}>
+                <Col span={5}>
                     <NumOfItemsLeft
                         todos={todos}
                     />
                 </Col>
-                <Col span={12}>
+                <Col span={13}>
                     <Filters
                         onFilterChange={onFilterChange}
                     />

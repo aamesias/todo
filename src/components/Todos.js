@@ -2,7 +2,7 @@ import React from 'react'
 import AddTodo from './AddTodo'
 import TodoList from './TodoList'
 import ListMenu from './ListMenu'
-import { List } from 'antd'
+import { Tooltip, Icon } from 'antd'
 
 
 export default class Todos extends React.Component {
@@ -179,7 +179,6 @@ export default class Todos extends React.Component {
             }
         })
     }
-
 
     render() {
         return (
