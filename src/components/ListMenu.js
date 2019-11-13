@@ -63,7 +63,7 @@ export default function ListMenu({ todos, onFilterChange, onClearCompleted }) {
     }
 
     return (
-        <div className='container todo-border todo-row margin'>
+        <div className='container todo-border todo-row margin white-background'>
 
             <Row type='flex' align='middle'>
                 <Col span={6}>

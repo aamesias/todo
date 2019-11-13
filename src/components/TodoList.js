@@ -1,15 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Icon, Checkbox, List, Input, Typography, Row, Col } from 'antd'
-import { Paragraph } from 'antd'
+
 
 function Item(props) {
     const todo = props.todo
     if (props.editKey === todo.key) {
         return (
-            /*<Paragraph editable={{onChange: props.onUpdateEditText}}>{props.value}</Paragraph>*/
-
-
             <Row className='todo-row' type='flex' justify='space-between' align='middle'>
                 <Col span={2}> </Col>
                 <Col span={20}>
@@ -71,35 +68,53 @@ export default function TodoList(props) {
 
     // returns the correct filtered todos depending on the current filter
     let filteredTodos = props.todos
+    let message = ''
     if (props.filter === 'completed') {
         filteredTodos = props.todos.filter((todo) => todo.isActive === false)
+        message = 'No todos completed. 😢'
     } else if (props.filter === 'active') {
         filteredTodos = props.todos.filter((todo) => todo.isActive === true)
+        message = 'All todos are done! 🥳'
     }
 
     if (props.todos.length === 0) {
         return null
     } else {
-        return (
-            <div className='container todo-row'>
-                <List bordered>
-                    {filteredTodos.map((todo) => (
-                        <List.Item key={todo.key}>
-                            <Item
-                                editKey={props.editKey}
-                                todo={todo}
-                                onToggleTodo={props.onToggleTodo}
-                                onDeleteTodo={props.onDeleteTodo}
-                                onUpdateEditText={props.onUpdateEditText}
-                                value={props.value}
-                                onChangeTodoText={props.onChangeTodoText}
-                                onEditItem={props.onEditItem}
-                            />
+        if (filteredTodos.length === 0) {
+            return (
+                <div className='container todo-row'>
+                    <List bordered>
+                        <List.Item className='empty-list'>
+                            {message}
                         </List.Item>
-                    ))}
-                </List>
-            </div>
-        )
+                    </List>
+                </div>
+            )
+
+        }
+        else {
+
+            return (
+                <div className='container todo-row'>
+                    <List bordered>
+                        {filteredTodos.map((todo) => (
+                            <List.Item key={todo.key}>
+                                <Item
+                                    editKey={props.editKey}
+                                    todo={todo}
+                                    onToggleTodo={props.onToggleTodo}
+                                    onDeleteTodo={props.onDeleteTodo}
+                                    onUpdateEditText={props.onUpdateEditText}
+                                    value={props.value}
+                                    onChangeTodoText={props.onChangeTodoText}
+                                    onEditItem={props.onEditItem}
+                                />
+                            </List.Item>
+                        ))}
+                    </List>
+                </div>
+            )
+        }
     }
 }
 
