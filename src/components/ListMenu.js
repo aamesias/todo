@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Button, Menu, Row, Col, Typography } from 'antd'
 
 
-function NumOfItemsLeft({ todos }) {
+const NumOfItemsLeft = ({ todos }) => {
     const numOfItems = todos.filter((todo) => todo.isActive === true).length
     if (numOfItems === 1) {
         return (<Typography.Text>{numOfItems} item left</Typography.Text>)
@@ -16,7 +16,7 @@ NumOfItemsLeft.propTypes = {
     todos: PropTypes.array.isRequired,
 }
 
-function Filters({ onFilterChange }) {
+const Filters = ({ onFilterChange }) => {
     return (
         <Menu mode="horizontal" defaultSelectedKeys={['all']}>
             <Menu.Item key='all' onClick={() => { onFilterChange('all') }}>
@@ -36,7 +36,7 @@ Filters.propTypes = {
     onFilterChange: PropTypes.func.isRequired,
 }
 
-function ClearCompleted({ todos, onClearCompleted }) {
+const ClearCompleted = ({ todos, onClearCompleted }) => {
     const todosCompleted = todos.filter((todo) => todo.isActive === false).length
     if (todosCompleted !== 0) {
         return (
@@ -57,7 +57,7 @@ ClearCompleted.propTypes = {
     onClearCompleted: PropTypes.func.isRequired,
 }
 
-export default function ListMenu({ todos, onFilterChange, onClearCompleted }) {
+const ListMenu = ({ todos, onFilterChange, onClearCompleted }) => {
     if (todos.length === 0) {
         return null
     }
@@ -86,6 +86,8 @@ export default function ListMenu({ todos, onFilterChange, onClearCompleted }) {
         </div>
     )
 }
+
+export default ListMenu
 
 ListMenu.propTypes = {
     todos: PropTypes.array.isRequired,

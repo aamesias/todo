@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Icon, Checkbox, List, Input, Typography, Row, Col } from 'antd'
 
 
-function Item(props) {
+const Item = (props) => {
     const todo = props.todo
     if (props.editKey === todo.key) {
         return (
@@ -64,7 +64,7 @@ Item.propTypes = {
 
 
 // Displays a list of the todos the usesr has added.
-export default function TodoList(props) {
+const TodoList = (props) => {
 
     // returns the correct filtered todos depending on the current filter
     let filteredTodos = props.todos
@@ -117,6 +117,8 @@ export default function TodoList(props) {
         }
     }
 }
+
+export default TodoList
 
 TodoList.propTypes = {
     todos: PropTypes.array.isRequired,

@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Input, Button, Row, Col, Icon } from 'antd'
 
-function CompleteAll({ todos, onToggleCompleteAll }) {
+const CompleteAll = ({ todos, onToggleCompleteAll }) => {
     if (todos.length !== 0) {
         return (
             <Button className='check-all-button'
@@ -24,7 +24,7 @@ CompleteAll.propTypes = {
 
 // Displays an input box that takes in a users todo
 // and adds it to the list after the user presses 'enter'
-export default function AddTodo({ todos, onToggleCompleteAll, placeholder, value, onChange, onKeyDown }) {
+const AddTodo = ({ todos, onToggleCompleteAll, placeholder, value, onChange, onKeyDown }) => {
     return (
         <div className='container'>
             <Row type='flex' justify='space-between'>
@@ -48,6 +48,8 @@ export default function AddTodo({ todos, onToggleCompleteAll, placeholder, value
         </div>
     )
 }
+
+export default AddTodo
 
 AddTodo.defaultProps = {
     placeholder: '',
