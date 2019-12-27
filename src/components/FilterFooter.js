@@ -57,7 +57,7 @@ ClearCompleted.propTypes = {
     onClearCompleted: PropTypes.func.isRequired,
 }
 
-const ListMenu = ({ todos, onFilterChange, onClearCompleted }) => {
+const FilterFooter = ({ todos, onFilterChange, onClearCompleted }) => {
     if (todos.length === 0) {
         return null
     }
@@ -87,9 +87,9 @@ const ListMenu = ({ todos, onFilterChange, onClearCompleted }) => {
     )
 }
 
-export default ListMenu
+export default FilterFooter
 
-ListMenu.propTypes = {
+FilterFooter.propTypes = {
     todos: PropTypes.array.isRequired,
     onFilterChange: PropTypes.func.isRequired,
     onClearCompleted: PropTypes.func.isRequired,

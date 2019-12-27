@@ -1,7 +1,7 @@
 import React from 'react'
-import AddTodo from './AddTodo'
+import AppHeader from './AppHeader'
 import TodoList from './TodoList'
-import ListMenu from './ListMenu'
+import FilterFooter from './FilterFooter'
 
 const Todos = () => {
     const [todos, setTodos] = React.useState([])
@@ -80,8 +80,7 @@ const Todos = () => {
 
     return (
         <React.Fragment>
-            <h1 className='center'>Todo</h1>
-            <AddTodo
+            <AppHeader
                 todos={todos}
                 onToggleCompleteAll={handleToggleCompleteAll}
                 placeholder='What needs to be done?'
@@ -101,7 +100,7 @@ const Todos = () => {
                 onUpdateEditText={updateEditText}
                 value={editText}
             />
-            <ListMenu
+            <FilterFooter
                 todos={todos}
                 onFilterChange={updateFilter}
                 onClearCompleted={handleClearCompleted}
