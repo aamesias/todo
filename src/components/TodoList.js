@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Icon, Checkbox, List, Input, Typography, Row, Col } from 'antd'
 
-
 const Item = (props) => {
     const todo = props.todo
     if (props.editKey === todo.key) {
@@ -62,10 +61,8 @@ Item.propTypes = {
 }
 
 
-
 // Displays a list of the todos the usesr has added.
 const TodoList = (props) => {
-
     // returns the correct filtered todos depending on the current filter
     let filteredTodos = props.todos
     let message = ''

@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Button, Menu, Row, Col, Typography } from 'antd'
 
-
 const NumOfItemsLeft = ({ todos }) => {
     const numOfItems = todos.filter((todo) => todo.isActive === true).length
     if (numOfItems === 1) {
